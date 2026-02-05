@@ -39,11 +39,11 @@ Pour chaque faille trouvée dans le code, vous devez rédiger une fiche d'anomal
 
 Votre audit doit au minimum couvrir les points suivants :
 
-1.  **Gestion des secrets :** Regardez comment l'application gère ses accès "admin".
-2.  **Manipulation de la base de données :** Observez la route `/api/user`. Que se passe-t-il si on injecte des caractères spéciaux dans l'URL ?
-3.  **Contrôle d'accès :** La route `/api/delete-user` est-elle vraiment protégée ? Le token est-il robuste ?
-4.  **Affichage dynamique :** Regardez la route `/api/welcome`. Pouvez-vous forcer l'affichage d'une fenêtre `alert()` dans le navigateur ?
-5.  **Fuite d'informations :** Que se passe-t-il si vous provoquez une erreur sur la route `/api/debug` ? Quelles informations le serveur donne-t-il ?
+1.  **Gestion des secrets :**
+2.  **Manipulation de la base de données :**
+3.  **Contrôle d'accès :**
+4.  **Affichage dynamique :**
+5.  **Fuite d'informations :**
 
 ---
 
