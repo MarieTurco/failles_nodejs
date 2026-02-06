@@ -18,9 +18,8 @@ db.serialize(() => {
 
 app.get('/api/user', (req, res) => {
   const username = req.query.username;
-  const query = `SELECT id, username, role FROM users WHERE username = '${username}'`;
-  
-  db.get(query, (err, row) => {
+  const query = "SELECT id, username, role FROM users WHERE username = ?";
+  db.get(query, [username], (err, row) => {
     if (err) res.status(500).send(err.message);
     else res.json(row);
   });
