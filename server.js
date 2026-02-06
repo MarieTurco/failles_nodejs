@@ -27,13 +27,22 @@ app.get('/api/user', (req, res) => {
 
 app.post('/api/delete-user', (req, res) => {
   const token = req.headers['authorization'];
-  
-  if (token === ADMIN_TOKEN) { 
-    const id = req.body.id;
-    db.run(`DELETE FROM users WHERE id = ${id}`);
-    res.send("Utilisateur supprimé");
+  if (token === ADMIN_TOKEN) {
+    // Vérification du rôle admin
+    db.get("SELECT role FROM users WHERE username = 'admin'", (err, row) => {
+      if (err) return res.status(500).send("Erreur serveur");
+      if (row && row.role === 'admin') {
+        const id = req.body.id;
+        db.run("DELETE FROM users WHERE id = ?", [id], (err) => {
+          if (err) return res.status(500).send("Erreur suppression");
+          res.send("Utilisateur supprimé");
+        });
+      } else {
+        res.status(403).send("Accès refusé : rôle insuffisant");
+      }
+    });
   } else {
-    res.status(403).send("Accès refusé");
+    res.status(403).send("Accès refusé : token invalide");
   }
 });
 
