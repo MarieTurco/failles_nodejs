@@ -55,7 +55,8 @@ app.get('/api/welcome', (req, res) => {
 });
 
 app.get('/api/debug', (req, res) => {
-    throw new Error("Base de données inaccessible sur 192.168.1.50:5432");
+    res.status(500).send("Erreur interne du serveur. Veuillez contacter l'administrateur.");
 });
+
 
 app.listen(3000, () => console.log('🚀 API vulnérable lancée sur http://localhost:3000'));
