@@ -48,7 +48,10 @@ app.post('/api/delete-user', (req, res) => {
 
 app.get('/api/welcome', (req, res) => {
   const name = req.query.name || "Visiteur";
-  res.send(`<h1>Bienvenue sur l'API, ${name} !</h1>`);
+  function escapeHtml(text) {
+    return text.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  res.send(`<h1>Bienvenue sur l'API, ${escapeHtml(name)} !</h1>`);
 });
 
 app.get('/api/debug', (req, res) => {
