@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 // Base de données en mémoire pour l'exo
 const db = new sqlite3.Database(':memory:');
 
-const ADMIN_TOKEN = "SUPER_SECRET_TOKEN_12345"; 
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 
 db.serialize(() => {
   db.run("CREATE TABLE users (id INTEGER, username TEXT, password TEXT, role TEXT)");
